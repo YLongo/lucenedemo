@@ -13,7 +13,7 @@
 
 
 
-步骤：
+创建一个 `IndexWriter` 的步骤：
 
 1. 定义一个 `analyzer` 来初始化 `IndexWriterConfig` 
 2. 创建一个 `Directory` 来告诉 Lucene 将索引存在哪里
