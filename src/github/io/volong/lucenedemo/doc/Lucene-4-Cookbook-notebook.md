@@ -19,3 +19,15 @@
 2. 创建一个 `Directory` 来告诉 Lucene 将索引存在哪里
 3. 实例化一个 `IndexWriter`
 
+## 1.1 执行搜索
+
+> 示例见：[LuceneTest](https://github.com/Volong/lucenedemo/blob/master/src/github/io/volong/lucenedemo/chapter01/LuceneTest.java)
+
+执行搜索的过程如下所示：
+
+![](../images/LuceneTest.jpg)
+
+查询字符串进入 `QueryParser.parse(String)`，通过 	`Analyzer` 将字符串变成一组 `token`。然后将 `token` 映射为 `Query` 对象，接着进入到 `IndexSearcher` 执行搜索，返回的结果为 `TopDocs` 对象。
+
+> 注意：在索引以及搜索时使用同一个 `analyzer`，可以获得更好的搜索结果。
+
