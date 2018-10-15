@@ -31,3 +31,29 @@
 
 > 注意：在索引以及搜索时使用同一个 `analyzer`，可以获得更好的搜索结果。
 
+# 2 分析你的文本
+
+**term** 是 Lucene 索引的基本单位。它与文档相关，包含两个属性：`field` 与 `value`。
+
+**analyzer (分析器)**：分词与过滤处理的容器。
+
+**tokenization (分词)**： 根据指定的分词组件定义的单词边界，将文本进行切分。
+
+分词之后，通过过滤器过滤，将 `token` 转换为 `term`，再进行存储。
+
+分析过程如下所示：
+
+![](../images/analyzer-process.jpg)
+
+`Tokenizer` 使用 `Reader` 去接收字符串。它产生的有序 `token` 集，被称之为 `TokenStream`。`TokenFilter` 接收 `TokenStream` 进行过滤处理。
+
+## 获取 TokenStream
+
+**TokenStream** 是在分析过程中，组件之间的一种数据格式。
+
+```java
+Reader reader = new StringReader("Text to be passed");
+Analyzer analyzer = new SimpleAnalyzer();
+TokenStream tokenStream = analyzer.tokenStream("myField", reader);
+```
+
