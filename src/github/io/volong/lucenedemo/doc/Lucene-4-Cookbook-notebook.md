@@ -31,7 +31,7 @@
 
 > 注意：在索引以及搜索时使用同一个 `analyzer`，可以获得更好的搜索结果。
 
-# 2 分析你的文本
+# 第二章 分析你的文本
 
 **term** 是 Lucene 索引的基本单位。它与文档相关，包含两个属性：`field` 与 `value`。
 
@@ -56,4 +56,21 @@ Reader reader = new StringReader("Text to be passed");
 Analyzer analyzer = new SimpleAnalyzer();
 TokenStream tokenStream = analyzer.tokenStream("myField", reader);
 ```
+
+## 获取 TokenAttribute 的值
+
+用于获取 `TokenStream` 中 `token` 的值。
+
+几种不同的 `TokenAttribute`：
+
+-   `CharTermAttribute`：用于获取 `token` 实际的文本值。
+-   `PositionIncrementAttribute`：当前 `token` 相对于上一个 `token` 的位置。默认值为 `1`。
+-   `OffsetAttribute`：原文本中 `term` 的开始位置与结束位置。
+-   `TypeAttribute`：用于标识数据类型。
+-   `FlagsAttribute`：对特殊的 `token` 进行标识。`TokenFilter` 根据标识执行特定的动作。
+-   `PayloadAttribute`：在每个索引的位置存储 `playload`，通常用于评分。
+
+## 使用 PositionIncrementAttribute
+
+
 
