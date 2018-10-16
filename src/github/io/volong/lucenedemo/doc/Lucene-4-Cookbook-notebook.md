@@ -72,5 +72,5 @@ TokenStream tokenStream = analyzer.tokenStream("myField", reader);
 
 ## 使用 PositionIncrementAttribute
 
-
+表示当前 `token` 相对上一个 `token` 的位置。默认值为 `1`。大于 `1` 则表示两个 `token` 之间不连续，中间有一些 `token` 被隐藏了，例如停顿词等。这个属性在短语匹配时非常有用。
 
