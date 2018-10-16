@@ -1,4 +1,4 @@
-package github.io.volong.lucenedemo.chapter01;
+package github.io.volong.chapter01;
 
 import java.io.IOException;
 import java.util.ArrayList;

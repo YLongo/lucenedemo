@@ -1,4 +1,4 @@
-package github.io.volong.lucenedemo.chapter02;
+package github.io.volong.chapter02;
 
 import java.io.IOException;
 import java.io.StringReader;
