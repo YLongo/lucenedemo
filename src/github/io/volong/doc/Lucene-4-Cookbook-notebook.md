@@ -74,3 +74,15 @@ TokenStream tokenStream = analyzer.tokenStream("myField", reader);
 
 表示当前 `token` 相对上一个 `token` 的位置。默认值为 `1`。大于 `1` 则表示两个 `token` 之间不连续，中间有一些 `token` 被隐藏了，例如停顿词等。这个属性在短语匹配时非常有用。
 
+在同义词匹配中，同义词的位置增量 (position increment) 为 `0`，表示跟原词在同一个位置上。
+
+## 使用 PerFieldAnalyzerWrapper
+
+`PerFieldAnalyzerWrapper(Analyzer defaultAnalyzer, Map<String, Analyzer> fieldAnalyzers)`
+
+构造函数接收两个参数：默认的 `analyzer`，字段与 `analyzer` 的映射。
+
+在分析过程中，如果没有在映射关系中找到相应的字段，则会使用默认的 `analyzer`。否则使用对应的 `analyzer`。
+
+## 自定义 TokenFilter
+
