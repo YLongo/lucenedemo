@@ -87,3 +87,8 @@ TokenStream tokenStream = analyzer.tokenStream("myField", reader);
 ## 自定义 TokenFilter
 
 自定义过滤器需要继承自 `TokenFilter`，并重写 `incrementToken()` 方法。
+
+## 自定义 Analyzer
+
+自定义分析器需要继承自 `Anaklyzer`，并重写 `createComponents` 方法。
+
