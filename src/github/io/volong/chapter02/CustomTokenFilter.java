@@ -9,6 +9,7 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 /**
+ * 自定义过滤器。
  * 将礼貌用语简短的单词扩展为完整的单词
  */
 public class CustomTokenFilter extends TokenFilter {

@@ -92,3 +92,7 @@ TokenStream tokenStream = analyzer.tokenStream("myField", reader);
 
 自定义分析器需要继承自 `Anaklyzer`，并重写 `createComponents` 方法。
 
+## 自定义 Tokenizer
+
+自定义分词器可以选择继承 `CharTokenizer`，并重写 `isTokenChar` 方法，可以适用于绝大数的情况。
+
