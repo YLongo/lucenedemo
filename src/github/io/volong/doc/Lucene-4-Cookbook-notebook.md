@@ -96,3 +96,36 @@ TokenStream tokenStream = analyzer.tokenStream("myField", reader);
 
 自定义分词器可以选择继承 `CharTokenizer`，并重写 `isTokenChar` 方法，可以适用于绝大数的情况。
 
+## 自定义 Attribute
+
+自定义属性需要创建一个 `Attribute` 接口，一个继承 `AttributeImpl` 的实现类与一个继承 `TokenFilter` 的实现类。
+
+Lucene 会去查找以 `Impl` 为后缀的 `Attribute` 实现类。
+
+# 第三章 索引数据
+
+文档与倒排索引的关系：
+
+![](../images/doc-inverted-index.png)
+
+索引文件在物理被段进行分割，段的命名格式为 `segments_1`、`segments_2` 等等。
+
+属于同一个段的文件，文件名相同，但是扩展名不同。
+
+每一个段都是一个独立的索引，可以被单独进行搜索。
+
+添加一个新的文件可以生成一个新的段。
+
+索引段示例图：
+
+![](../images/index-segment.png)
+
+`IndexReader` 会在内部对段进行合并，所以我们不需要考虑考虑索引分段的问题。
+
+## 获取 IndexWriter
+
+Lucene 提供了几个选项来控制索引的打开。
+
+配置对象 `IndexWriterConfig` 用来设置 `IndexWriter`，并提供了三个 `OpenMode` 选项来打开索引。
+
+-   **APPEND：**打开一个在文件夹已经存在的索引，允许 `IndexWriter` 进行更新。

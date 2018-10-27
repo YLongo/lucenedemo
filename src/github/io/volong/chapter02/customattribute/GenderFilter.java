@@ -10,6 +10,7 @@ import github.io.volong.chapter02.customattribute.GenderAttribute.Gender;
 
 public class GenderFilter extends TokenFilter {
 
+    // 将属性注册到 TokenStream 中
     private GenderAttribute genderAttr = addAttribute(GenderAttribute.class);
     
     private CharTermAttribute charTermAttr = addAttribute(CharTermAttribute.class);
