@@ -132,3 +132,5 @@ Lucene 提供了几个选项来控制索引的打开。
 -   **CREATE：**如果索引不存在，则新建，否则进行替换。
 -   **CREATE_OR_APPEND：**默认为这个选项。如果没有找到索引，则新建，否则 `IndexWriter` 在已存在的索引上进行追加。
 
+## 创建 StringField
+
