@@ -128,4 +128,7 @@ Lucene 提供了几个选项来控制索引的打开。
 
 配置对象 `IndexWriterConfig` 用来设置 `IndexWriter`，并提供了三个 `OpenMode` 选项来打开索引。
 
--   **APPEND：**打开一个在文件夹已经存在的索引，允许 `IndexWriter` 进行更新。
+-   **APPEND：**打开一个已经存在的索引，允许 `IndexWriter` 进行更新。不会新建索引。如果指定的索引不存在，则会抛出 `IndexNotFoundException`。
+-   **CREATE：**如果索引不存在，则新建，否则进行替换。
+-   **CREATE_OR_APPEND：**默认为这个选项。如果没有找到索引，则新建，否则 `IndexWriter` 在已存在的索引上进行追加。
+
