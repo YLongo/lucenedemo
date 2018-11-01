@@ -6,13 +6,13 @@ import java.io.IOException;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field.Store;
-import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
-public class CreateStringField {
+public class CreateTextField {
 
     public static void main(String[] args) throws IOException {
         
@@ -22,17 +22,16 @@ public class CreateStringField {
         
         IndexWriterConfig config = new IndexWriterConfig(Version.LATEST, analyzer);
         
-        Document document = new Document();
-        
-        StringField telphoneNo = new StringField("telephone_number", "12345678912", Store.YES);
-        document.add(telphoneNo);
-        
-        StringField areaCode = new StringField("area_code", "", Store.YES);
-        document.add(areaCode);
-        
         IndexWriter indexWriter = new IndexWriter(dir, config);
-        indexWriter.addDocument(document);
         
+        Document doc = new Document();
         
+        String text = "Lucene is an Information Retrieval library written in Java.";
+        
+        doc.add(new TextField("text", text, Store.YES));
+        
+        indexWriter.addDocument(doc);
+        
+        indexWriter.commit();
     }
 }
