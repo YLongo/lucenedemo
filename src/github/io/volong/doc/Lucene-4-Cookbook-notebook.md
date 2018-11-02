@@ -154,7 +154,18 @@ Lucene 内部将数字当作一个词来处理，通过 `trie` 树来索引它�
 
 如果你想基于数值字段进行排序，那么应该新建一个单值字段 (设置 `precisionStep` 的值为 `Integer.MAX_VALUE` 可以保证索引不会产生分支)，因为这比范围索引更加有效。
 
+## 创建 DocValue 字段
 
+字段的存储是面向行的，但是 `DocValue` 的存储是面向列的。在检索的时候，所有的字段信息都会跟随文档返回，所以加载文档的相关信息速度非常快。但是如果你想要对字段进行扫描，将会变得缓慢，因为你必须遍历所有的文档，在每次遍历中加载文档的字段信息。`DocValue` 按列存储 `DocId` 到值的映射，因此通过 `DocValue` 去加载文档可以很快。
+
+字段与 `DocValue` 的存储结构差异如下所示：
+
+![](../images/Field-DocValue.jpg)
+
+Lucene 提供了如下几种 `DocValue` 类型：
+
+-   `BinaryDocValues`：
+-   `NumericDocValues`：
 
 
 
