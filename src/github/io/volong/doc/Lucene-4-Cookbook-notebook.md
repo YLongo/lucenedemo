@@ -164,8 +164,22 @@ Lucene 内部将数字当作一个词来处理，通过 `trie` 树来索引它�
 
 Lucene 提供了如下几种 `DocValue` 类型：
 
--   `BinaryDocValues`：
--   `NumericDocValues`：
+-   `BinaryDocValues`：每个文档都是一个 `byte[]` 数组，用于存储自定义的数据结构。
+-   `NumericDocValues`：每个文档都是单值的，数值类型的值。
+-   `SortedDocValues`：每个文档都是单值的，字符串类型的值，存储与排序分离。`DocValue` 本身为 `DocId` 到`词ID` 的映射，`词ID` 引用有序词列表中的一个词。
+-   `SortedNumericDocValues`：跟 `SortedDocValues` 类似，但是仅仅适用于数值。
+-   `SortedSetDocValues`：跟 `SortedDocValues` 类似，但是每个文档在 `DocValues` 中都是映射一个集合而不是单个值。
+
+## 事务提交与索引版本控制
+
+事务的属性：**ACID** (原子性，一致性，隔离性，持久性)。
+
+-   **原子性：**该属性要求事务要么完整，要不执行。当一个事务执行失败，事务中的任何更改都不应该存在。只有在事务完整的执行，并且提交之后，事务所做的更改才能可见。
+-   **一致性：**该属性要求任何提交更改将系统从一个有效状态带到另一个有效状态。
+-   **隔离性：**多个事务执行时互不干扰。
+-   **持久性：**该属性要求一旦事务提交，改变就是永久的，即使是发生故障。
+
+
 
 
 
