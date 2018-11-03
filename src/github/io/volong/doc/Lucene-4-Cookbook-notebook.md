@@ -179,6 +179,14 @@ Lucene 提供了如下几种 `DocValue` 类型：
 -   **隔离性：**多个事务执行时互不干扰。
 -   **持久性：**该属性要求一旦事务提交，改变就是永久的，即使是发生故障。
 
+Lucene 支持二段提交。可以事先在 `IndexWriter` 上调用 `prepareCommit()` 最一些必要的工作 (例如，将更改刷新到磁盘上)。之后，可以调用 `commit()` 方法提交这些更改或者调用 `rollback()` 对事物进行回滚。调用 `callback()` 方法也会关闭 `IndexWriter`。调用 `commit()` 实际上内部会去调用 `prepareCommit()`。调用 `close()` 时，会在 `IndexWriter` 关闭前调用 `commit()`。
+
+一份 Lucene 索引可能会被提交多次。每次索引的提交都可以看作当前时间点索引的一个快照。默认情况下，Lucene 使用的策略类为 `IndexDeletionPolicy`，在成功提交之后会删除之前提交的索引。为了保留之前提交的索引，你可以选择自定义一个 `IndexDeletionPolicy` 或者使用内置的 `NoDeletionPolicy`。下面是 `IndexDeletionPolicy` 中提供的一些开箱即用的策略：
+
+-   `KeepOnlyLastCommitDeletionPolicy`：默认策略。在新的提交完成时，保留新的索引，删除之前的索引。
+-   `NoDeletionPolicy`：所有的索引都将会被保留。只有在对每个索引调用了 `delete()` 才会被移除。使用该策略，可以查询之前的索引，以及维护了回滚点的集合。一个可能的场景是数据协调，当数据在数据源与索引之间不同步时，可以通过执行回滚协调。
+-   
+
 
 
 
