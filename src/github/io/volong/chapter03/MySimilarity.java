@@ -39,7 +39,6 @@ public class MySimilarity extends Similarity {
             
             @Override
             public float score(int doc, float freq) {
-
                 return values.get(doc) * scorer.score(doc, freq);
             }
             
