@@ -201,7 +201,7 @@ Lucene 支持二段提交。可以事先在 `IndexWriter` 上调用 `prepareComm
 
 ## 在索引期间更改相似度实现
 
-
+Lucene 默认的相似度实现为 `TFIDFSimilarity`。我们可以通过继承 `Similarity` 来自定义相似度实现。
 
 
 
