@@ -31,7 +31,7 @@
 
 > 注意：在索引以及搜索时使用同一个 `analyzer`，可以获得更好的搜索结果。
 
-# 第二章 分析你的文本
+# 第二章 文本分析
 
 **term** 是 Lucene 索引的基本单位。它与文档相关，包含两个属性：`field` 与 `value`。
 
@@ -203,7 +203,14 @@ Lucene 支持二段提交。可以事先在 `IndexWriter` 上调用 `prepareComm
 
 Lucene 默认的相似度实现为 `TFIDFSimilarity`。我们可以通过继承 `Similarity` 来自定义相似度实现。
 
+# 第三章 索引查询
 
+## 获取 IndexReader
+
+Lucene 提供 `IndexReader` 来获取索引某个时间点的视图。也就是说你可以并发的去写索引，但是同时你可以使用 `IndexReader` 去获取尚未提交的索引。
+`IndexReader` 是一个抽象类，它有两个具体的实现：`AtomicReader` 与 `CompositeReader`。
+`AtomicReader` 可以原子的读取某个索引单一的段，支持检索存储字段，docValue，term 以及文档数。
+`CompositeReader` 包含多个段上的 `AtomicReader` 列表，它仅仅只支持对存储字段进行检索。
 
 
 
