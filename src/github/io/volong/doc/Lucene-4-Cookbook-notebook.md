@@ -210,7 +210,17 @@ Lucene 默认的相似度实现为 `TFIDFSimilarity`。我们可以通过继承 
 Lucene 提供 `IndexReader` 来获取索引某个时间点的视图。也就是说你可以并发的去写索引，但是同时你可以使用 `IndexReader` 去获取尚未提交的索引。
 `IndexReader` 是一个抽象类，它有两个具体的实现：`AtomicReader` 与 `CompositeReader`。
 `AtomicReader` 可以原子的读取某个索引单一的段，支持检索存储字段，docValue，term 以及文档数。
-`CompositeReader` 包含多个段上的 `AtomicReader` 列表，它仅仅只支持对存储字段进行检索。
+`CompositeReader` 包含多个段上的 `AtomicReader` 列表，它仅仅只支持对存储字段进行检索，其它的属性从底层的 `AtomicReader` 中合并。
+
+## 通过 FieldCache 在内存中使用非倒排的单值字段
+
+`FieldCache` 是内存中的数据结果，通过数组进行存储，它的值对应 `DocId`。
+
+>   注意，一旦 `FieldCache` 被初始化，它就是静态的，非同步的数据。如果想要重新打开一个 `IndexReader`，它需要重新进行初始化。
+
+
+
+
 
 
 
