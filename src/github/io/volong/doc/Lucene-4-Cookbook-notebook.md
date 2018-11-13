@@ -203,7 +203,7 @@ Lucene 支持二段提交。可以事先在 `IndexWriter` 上调用 `prepareComm
 
 Lucene 默认的相似度实现为 `TFIDFSimilarity`。我们可以通过继承 `Similarity` 来自定义相似度实现。
 
-# 第三章 索引查询
+# 第四章 索引查询
 
 ## 获取 IndexReader
 
@@ -218,10 +218,23 @@ Lucene 提供 `IndexReader` 来获取索引某个时间点的视图。也就是�
 
 >   注意，一旦 `FieldCache` 被初始化，它就是静态的，非同步的数据。如果想要重新打开一个 `IndexReader`，它需要重新进行初始化。
 
+## TermVector (词向量)
+
+`TermVector` 可以基于词来检索每个文档，统计索引中的数据。例如高亮或者其它基于词的分析。这个功能默认是没有开启，因为这些数据的计算非常的耗性能，并且会增加索引的大小。
+
+`TermVector` 为每个文档提供了如下的数据：
+
+-   词频 (Term frequency)
+-   词位置 (Term position)
+-   词偏移量 (Term offset)
+
+词频表示某个词在某个文档中出现的次数。词位置表示词在某个文档中的位置，每个位置通过词进行递增。偏移量包含了字符的起始位置以及结束位置，可以定位文档中词的位置。
+
+将如下文本添加到索引中，它的 `TermVector` 如下所示：
+
+![](../images/termVector.png)
+> 去掉了停用词 on 与 a
 
 
 
 
-
-
- 
