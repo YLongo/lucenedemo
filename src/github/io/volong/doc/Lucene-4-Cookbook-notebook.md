@@ -235,6 +235,10 @@ Lucene 提供 `IndexReader` 来获取索引某个时间点的视图。也就是�
 ![](../images/termVector.png)
 > 去掉了停用词 on 与 a
 
+## IndexSearcher (索引查询器)
+
+`IndexSearcher` 可以对索引进行查询，返回 `TopDocs` 作为结果。`TopDocs` 包含一组 `ScoreDoc`，它包含了 `DocId` 以及每个匹配到的文档的得分。`TopDocs` 虽然包含了 `DocId`，但是没有包含任何文档内容。文档内容的获取需要依赖 `IndexReader` 或 `FieldCache`。
+
 
 
 
