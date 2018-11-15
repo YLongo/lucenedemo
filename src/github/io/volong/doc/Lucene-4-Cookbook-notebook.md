@@ -239,6 +239,26 @@ Lucene 提供 `IndexReader` 来获取索引某个时间点的视图。也就是�
 
 `IndexSearcher` 可以对索引进行查询，返回 `TopDocs` 作为结果。`TopDocs` 包含一组 `ScoreDoc`，它包含了 `DocId` 以及每个匹配到的文档的得分。`TopDocs` 虽然包含了 `DocId`，但是没有包含任何文档内容。文档内容的获取需要依赖 `IndexReader` 或 `FieldCache`。
 
+## 构建查询
+
+可以通过 `QueryParser` 或者新建一个 `Query` 对象来构建查询。
+
+> 如果使用 `QueryParser`，必须使用一个分析器 (analyzer) 去分析要查询的文本。
+
+## 指定排序逻辑
+
+默认情况下，Lucene 将查询结果按照得分降序排。
+
+想要指定排序，需要创建 `SortField` 对象，然后使用 `Sort` 对象将其包裹。
+
+> SortField sortField = new SortField("name", SortField.Type.STRING);
+> Sort sort = new Sort(sortField);
+
+`Sort` 类有两个静态的 `Sort` 变量：
+
+- **RELEVANCE**：以相关度进行排序。默认。
+- **INDEXORDER**：以索引的自然顺序进行排序。
+
 
 
 
