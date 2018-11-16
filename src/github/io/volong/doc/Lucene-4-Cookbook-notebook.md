@@ -250,15 +250,22 @@ Lucene 提供 `IndexReader` 来获取索引某个时间点的视图。也就是�
 默认情况下，Lucene 将查询结果按照得分降序排。
 
 想要指定排序，需要创建 `SortField` 对象，然后使用 `Sort` 对象将其包裹。
-
-> SortField sortField = new SortField("name", SortField.Type.STRING);
-> Sort sort = new Sort(sortField);
-
+```java
+SortField sortField = new SortField("name", SortField.Type.STRING);
+Sort sort = new Sort(sortField);
+```
 `Sort` 类有两个静态的 `Sort` 变量：
 
 - **RELEVANCE**：以相关度进行排序。默认。
+
 - **INDEXORDER**：以索引的自然顺序进行排序。
 
+    `SortField` 通过一个字段名以及一个 `SortField` 类型来进行实例化。类型可以为 `STRING` 以及数值类型：`DOUBLE`、`FLOAT`、`INT`、`LONG`。也可以指定为 `BYTES` 或者 `SCORE` (与 `Sort.RELEVANCE` 一样)。如果想要自定义排序，需要提供自定义的排序逻辑。
 
+    排序在内存中执行，排序字段存储在缓存中。排序时的内存使用情况可以通过如下的公式来进行估计：
+```java
+    4 * IndexReader.maxDoc() * 排序字段的个数
+```
 
+缓存是由长度为 `IndexReader.maxDoc()` 的整型数组组成。
 
