@@ -269,3 +269,6 @@ Sort sort = new Sort(sortField);
 
 缓存是由长度为 `IndexReader.maxDoc()` 的整型数组组成。
 
+## 获取搜索结果
+
+通过 `TopDocs` 来获取搜索结果。`TopDocs` 有两个属性，一个 `ScoreDoc` 数组以及一个 `totalHits`。`ScoreDoc` 包含 `DocId` 与 `score`。`totalHits` 表示匹配到了多少的搜索结果。通过 `IndexReader.document(int DocId)` 来获取具体文档的内容。
