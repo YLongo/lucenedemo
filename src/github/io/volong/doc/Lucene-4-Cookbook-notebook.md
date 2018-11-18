@@ -272,3 +272,8 @@ Sort sort = new Sort(sortField);
 ## 获取搜索结果
 
 通过 `TopDocs` 来获取搜索结果。`TopDocs` 有两个属性，一个 `ScoreDoc` 数组以及一个 `totalHits`。`ScoreDoc` 包含 `DocId` 与 `score`。`totalHits` 表示匹配到了多少的搜索结果。通过 `IndexReader.document(int DocId)` 来获取具体文档的内容。
+
+如果一个字段是存储字段 (`Field.Store.YES`)，可以通过 `Document.getField(String)` 从索引中获取字段的值。如果字段的值存储在 `FieldCache` 中，可以直接从缓存中获取。
+
+## 分页
+
