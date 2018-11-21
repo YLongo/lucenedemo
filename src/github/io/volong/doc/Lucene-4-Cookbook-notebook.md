@@ -277,3 +277,4 @@ Sort sort = new Sort(sortField);
 
 ## 分页
 
+使用 `IndexSearcher` 的 `searchAfter` 方法，并将上一页的最后一个 `ScoreDoc` 传递给该方法。
